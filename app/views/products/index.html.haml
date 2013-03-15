@@ -1,0 +1,40 @@
+%div{:id => "wrapper"}
+  %h1 Listing products
+
+  %table
+    %tr
+      %th Title
+      %th Description
+      %th Price
+      %th Stock quantity
+      %th
+      %th
+      %th
+
+    - @products.each do |product|
+      %tr
+        %td= product.title
+        %td= product.description
+        %td= number_to_currency(product.price)
+        %td= product.stock_quantity
+        %td= link_to 'Show', product
+        %td= link_to 'Edit', edit_product_path(product)
+        %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+  %p= "The average of all products is #{number_to_currency(@total)}"
+  %p= "The most expensive product is #{number_to_currency(@maximum)}"
+  %p= "There are #{@number_of} products"
+  %p= "There are #{@on_hand} items in inventory"
+
+  = link_to 'New Product', new_product_path
+
+  %div{:class => "hidden"}
+    %button{:id => "hide"} Hide Bacons
+    %button{:id => "show"} Show Bacons
+
+  %div{:id => "bacons"}
+    - 100.times do
+      %p Chunky bacon
+
+
